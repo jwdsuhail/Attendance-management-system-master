@@ -24,15 +24,13 @@
         /* CSS RESET */
 
         body {
-	height: 100vh;
-		background-size: cover;
-		background-color: black;
-		background-position: center;
-		background-repeat: no-repeat;
-		font-family: 'Poppins', sans-serif;
-	  
-}
-
+            height: 100vh;
+            background-size: cover;
+            background-color: black;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Poppins', sans-serif;
+        }
 
         .sub-header {
             margin-top: 1px;
@@ -44,26 +42,29 @@
         }
 
         .inputBx select {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        border: none;
-        border-bottom: 2px solid #db6e34; /* Add an underline effect */
-        background-color: #0000009e;
-        color: white;
-        border-radius: 0;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        cursor: pointer;
-        transition: border-bottom 0.3s ease-in-out;
-      }
-      .custom-border {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid #db6e34; /* Add an underline effect */
+            background-color: #0000009e;
+            color: white;
+            border-radius: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+            transition: border-bottom 0.3s ease-in-out;
+        }
+
+        .custom-border {
             border-bottom: 2px solid black; /* You can adjust the border thickness (4px) to your desired value. */
         }
+
         .custom-border2 {
             border-top: 2px solid black;
         }
+
         .left-side-info {
             position: absolute;
             left: 10px;
@@ -74,6 +75,14 @@
             background-color: rgba(0, 0, 0, 0.5);
             padding: 10px;
             border-radius: 5px;
+        }
+
+        .yea {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 45px; /* Adjust as needed */
         }
     </style>
 </head>
@@ -146,7 +155,7 @@
       <center>
 </body>
 
-<div class="left-side-info">
+<div class="yea">
     <p>Username: Jawad</p>
     <p>Password: 123</p>
 </div>
