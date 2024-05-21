@@ -64,6 +64,17 @@
         .custom-border2 {
             border-top: 2px solid black;
         }
+        .left-side-info {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 18px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
@@ -86,7 +97,7 @@
 
         <section class="upper">
             
-            <div class="container ">
+            <div class="container">
                 <div class="content">
                     <div class="nav">
     
@@ -125,6 +136,8 @@
                 <input type="submit" value="Sign in" />
             </div>
     </form>
+
+    
             <div class="links">
                 <a href="#"></a>
             </div>
@@ -132,4 +145,10 @@
       </div>
       <center>
 </body>
+
+<div class="left-side-info">
+    <p>Username: Jawad</p>
+    <p>Password: 123</p>
+</div>
+
 </html>
