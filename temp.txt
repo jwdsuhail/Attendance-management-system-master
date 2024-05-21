@@ -1,0 +1,108 @@
+$attendanceData = [];
+            foreach ($columnsToDisplay as $columnName) {
+                $sqlAttendance = "SELECT `$columnName` FROM `$Subject_ID` WHERE `Student_ID`='$Student_ID'";
+                $resultAttendance = $conn->query($sqlAttendance);
+                $rowAttendance = $resultAttendance->fetch_assoc();
+                $attendanceData[$columnName] = $rowAttendance[$columnName];
+            }
+            $filteredData = array_filter($attendanceData);
+        
+            
+                // Display the line chart
+                echo "<div><canvas id='linechart'></canvas></div>";
+                if (isset($attendanceData) && count($attendanceData) > 0) {
+                    // Filter out empty values
+                    $filteredData = array_filter($attendanceData);
+                
+                    // Create arrays for the x-axis (dates) and y-axis (status)
+                    $dates = array_keys($filteredData);
+                    $status = array_values($filteredData);
+                
+                    // Separate data by status
+                    $presentDates = [];
+                    $absentDates = [];
+                    $lateDates = [];
+                
+                    foreach ($filteredData as $date => $value) {
+                        switch ($value) {
+                            case "Present":
+                                $presentDates[] = $date;
+                                break;
+                            case "Absent":
+                                $absentDates[] = $date;
+                                break;
+                            case "Late":
+                                $lateDates[] = $date;
+                                break;
+                        }
+                    }
+                
+                    // Generate JavaScript code for Chart.js
+                    echo '<script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var ctx = document.getElementById("linechart").getContext("2d");
+                            var myChart = new Chart(ctx, {
+                                type: "line",
+                                data: {
+                                    labels: ' . json_encode($dates) . ',
+                                    datasets: [{
+                                        label: "Present",
+                                        data: ' . json_encode(array_map(function ($date) use ($dates, $presentDates) {
+                                            return in_array($date, $presentDates) ? array_search($date, $dates) + 1 : null;
+                                        }, $dates)) . ',
+                                        borderColor: "green",
+                                        borderWidth: 2,
+                                        pointRadius: 5,
+                                        pointHoverRadius: 7,
+                                        fill: false,
+                                    },
+                                    {
+                                        label: "Absent",
+                                        data: ' . json_encode(array_map(function ($date) use ($dates, $absentDates) {
+                                            return in_array($date, $absentDates) ? array_search($date, $dates) + 1 : null;
+                                        }, $dates)) . ',
+                                        borderColor: "red",
+                                        borderWidth: 2,
+                                        pointRadius: 5,
+                                        pointHoverRadius: 7,
+                                        fill: false,
+                                    },
+                                    {
+                                        label: "Late",
+                                        data: ' . json_encode(array_map(function ($date) use ($dates, $lateDates) {
+                                            return in_array($date, $lateDates) ? array_search($date, $dates) + 1 : null;
+                                        }, $dates)) . ',
+                                        borderColor: "yellow",
+                                        borderWidth: 2,
+                                        pointRadius: 5,
+                                        pointHoverRadius: 7,
+                                        fill: false,
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        x: [{
+                                            type: "time",
+                                            time: {
+                                                unit: "day",
+                                                displayFormats: {
+                                                    day: "DD-MM-YYYY"
+                                                }
+                                            },
+                                            scaleLabel: {
+                                                display: true,
+                                                labelString: "Date"
+                                            }
+                                        }],
+                                        y: {
+                                            scaleLabel: {
+                                                display: true,
+                                                labelString: "Attendance"
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                        </script>';
+                }
