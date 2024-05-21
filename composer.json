@@ -1,7 +1,8 @@
 {
     "require": {
-        "phpoffice/phpexcel": "^1.8",
-        "phpoffice/phpspreadsheet": "^1.29",
-        "phpmailer/phpmailer": "^6.9"
+        "php": "^7.3",
+        "phpoffice/phpspreadsheet": "1.15.0",  
+        "maennchen/zipstream-php": "2.1.0",    
+        "psr/simple-cache": "1.0.1"            
     }
 }
